@@ -1,0 +1,1 @@
+This is a nested classpath resource used to verify relative asset lookup.

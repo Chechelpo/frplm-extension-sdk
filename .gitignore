@@ -1,0 +1,4 @@
+# Project exclude paths
+/frplm-annotations-processor/target/
+/frplm-extension-api/target/
+/scripts/

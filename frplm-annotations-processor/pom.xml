@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.chechelpo.frplm</groupId>
+        <artifactId>frplm-extension-sdk</artifactId>
+        <version>0.1.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>frplm-annotations-processor</artifactId>
+    <packaging>jar</packaging>
+
+    <name>frplm-annotations-processor</name>
+    <description>Annotation processor for generating FRPLM extension registration metadata.</description>
+    <url>https://github.com/chechelpo/frplm</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/mit</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>chechelpo</id>
+            <name>Felipe Yelpo</name>
+            <url>https://github.com/chechelpo</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/chechelpo/frplm.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/chechelpo/frplm.git</developerConnection>
+        <url>https://github.com/chechelpo/frplm</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.chechelpo.frplm</groupId>
+            <artifactId>frplm-extension-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Prevent the annotation processor module from trying to run itself. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
