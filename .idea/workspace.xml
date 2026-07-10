@@ -4,14 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f809d77-d9d1-42c6-8997-9173067a226f" name="Changes" comment="" />
+    <list default="true" id="5f809d77-d9d1-42c6-8997-9173067a226f" name="Changes" comment="Initial commit">
+      <change afterPath="$PROJECT_DIR$/frplm-annotations-processor/src/main/java/io/github/chechelpo/frplm/extensions/processor/FrplmExtensionMetadataWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frplm-annotations-processor/src/main/resources/META-INF/frlpm/extension-sdk.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frplm-annotations-processor/src/test/java/io/github/chechelpo/frplm/extensions/processor/FrplmExtensionProcessorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frplm-annotations-processor/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frplm-annotations-processor/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frplm-annotations-processor/src/main/java/io/github/chechelpo/frplm/extensions/processor/FrplmExtensionProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/frplm-annotations-processor/src/main/java/io/github/chechelpo/frplm/extensions/processor/FrplmExtensionProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frplm-extension-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frplm-extension-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frplm-extension-api/src/main/java/io/github/chechelpo/frplm/extensions/api/activation/PrePromptGeneration.java" beforeDir="false" afterPath="$PROJECT_DIR$/frplm-extension-api/src/main/java/io/github/chechelpo/frplm/extensions/api/activation/PrePromptGeneration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frplm-extension-api/src/main/java/io/github/chechelpo/frplm/extensions/api/types/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/frplm-extension-api/src/main/java/io/github/chechelpo/frplm/extensions/api/types/Extension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="62" />
+    <option name="cachedIndexableFilesCount" value="69" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,61 +52,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000170581445145" />
-      <entry key="MS500" value="1.136223605934635" />
-      <entry key="S2" value="1.997346205080078" />
-      <entry key="S5" value="2.9062986357592058" />
-      <entry key="S10" value="3.834123814579777" />
-      <entry key="S30" value="5.053570676588413" />
-      <entry key="S60" value="5.49041621365442" />
-      <entry key="M2" value="5.735337254228606" />
-      <entry key="M5" value="5.891658361360835" />
-      <entry key="M10" value="5.9454071122817655" />
-      <entry key="M15" value="5.9635102458845495" />
-      <entry key="M30" value="5.981707698198038" />
-      <entry key="H1" value="5.990841959620363" />
-      <entry key="H2" value="5.995418003268497" />
-      <entry key="H4" value="5.99770825697667" />
-      <entry key="D1" value="5.999617939360432" />
-      <entry key="W1" value="5.9999454173741205" />
+      <entry key="MS100" value="1.2073298868506495" />
+      <entry key="MS500" value="1.7431914914249187" />
+      <entry key="S2" value="2.2631415124559133" />
+      <entry key="S5" value="2.6176206923727943" />
+      <entry key="S10" value="2.7897455030247764" />
+      <entry key="S30" value="2.925331089557882" />
+      <entry key="S60" value="2.987857524330229" />
+      <entry key="M2" value="3.391004237944261" />
+      <entry key="M5" value="6.092821511587436" />
+      <entry key="M10" value="9.668763347221436" />
+      <entry key="M15" value="11.698567557563056" />
+      <entry key="M30" value="14.397973363337481" />
+      <entry key="H1" value="16.068640044480475" />
+      <entry key="H2" value="16.999238310338356" />
+      <entry key="H4" value="17.49051547602548" />
+      <entry key="D1" value="17.913792172663744" />
+      <entry key="W1" value="17.987652522757003" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="3.610475941250758E-53" />
-      <entry key="MS500" value="3.247228807085669E-11" />
-      <entry key="S2" value="0.0023871418286730015" />
-      <entry key="S5" value="0.08936167263059754" />
-      <entry key="S10" value="0.2989342279341687" />
-      <entry key="S30" value="0.6686392728753716" />
-      <entry key="S60" value="0.8177036583477976" />
-      <entry key="M2" value="0.904269682311531" />
-      <entry key="M5" value="0.9605482567306713" />
-      <entry key="M10" value="0.9800756382701651" />
-      <entry key="M15" value="0.9866725880727756" />
-      <entry key="M30" value="0.9933139423529578" />
-      <entry key="H1" value="0.9966513644966118" />
-      <entry key="H2" value="0.998324278226575" />
-      <entry key="H4" value="0.9991617878134522" />
-      <entry key="D1" value="0.999860249152257" />
-      <entry key="W1" value="0.9999800343973437" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="4.613055847127378E-282" />
+      <entry key="S2" value="4.634439084093724E-71" />
+      <entry key="S5" value="7.351887812561177E-29" />
+      <entry key="S10" value="8.57431502374055E-15" />
+      <entry key="S30" value="2.047107268243332E-5" />
+      <entry key="S60" value="0.004583216973078126" />
+      <entry key="M2" value="0.07494956051112482" />
+      <entry key="M5" value="0.4823766484831786" />
+      <entry key="M10" value="0.960559465568781" />
+      <entry key="M15" value="1.2202809128117407" />
+      <entry key="M30" value="1.5581769546739064" />
+      <entry key="H1" value="1.76416851075766" />
+      <entry key="H2" value="1.8780801380951804" />
+      <entry key="H4" value="1.9380024640328266" />
+      <entry key="D1" value="1.9895197470736974" />
+      <entry key="W1" value="1.9984991701630441" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9075345290385756" />
-      <entry key="MS500" value="1.1142330824291835" />
-      <entry key="S2" value="1.9865461204595039" />
-      <entry key="S5" value="2.9540185889253663" />
-      <entry key="S10" value="4.073497028017214" />
-      <entry key="S30" value="5.6806101049244075" />
-      <entry key="S60" value="6.2830172729211755" />
-      <entry key="M2" value="6.625813247779455" />
-      <entry key="M5" value="6.846367000014186" />
-      <entry key="M10" value="6.9225071334989146" />
-      <entry key="M15" value="6.9481865261302" />
-      <entry key="M30" value="6.974017164297478" />
-      <entry key="H1" value="6.986989497717711" />
-      <entry key="H2" value="6.993489970262705" />
-      <entry key="H4" value="6.996743789544948" />
-      <entry key="D1" value="6.999457132124203" />
-      <entry key="W1" value="6.999922443376707" />
+      <entry key="MS100" value="0.23943051061075626" />
+      <entry key="MS500" value="1.2030518886863548" />
+      <entry key="S2" value="1.914683072693489" />
+      <entry key="S5" value="2.3793951933185387" />
+      <entry key="S10" value="2.6423829097116345" />
+      <entry key="S30" value="2.868259486679821" />
+      <entry key="S60" value="2.962531240546667" />
+      <entry key="M2" value="3.449141832858666" />
+      <entry key="M5" value="6.565070725747036" />
+      <entry key="M10" value="10.622353799588542" />
+      <entry key="M15" value="12.913521553244895" />
+      <entry key="M30" value="15.953046749122207" />
+      <entry key="H1" value="17.8311232131327" />
+      <entry key="H2" value="18.876438929223756" />
+      <entry key="H4" value="19.4280684989931" />
+      <entry key="D1" value="19.903235626550245" />
+      <entry key="W1" value="19.986140759385407" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -102,26 +120,63 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.FrplmExtensionProcessorTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/felipey/IdeaProjects/A",
+    "last_opened_file_path": "/home/felipey/Code/frplm/frplm-extension-sdk",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frplm-annotations-processor/src/main/resources/META-INF/" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="io.github.chechelpo.frplm.extensions.processor" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FrplmExtensionProcessorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="frplm-annotations-processor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.github.chechelpo.frplm.extensions.processor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="io.github.chechelpo.frplm.extensions.processor" />
+      <option name="MAIN_CLASS_NAME" value="io.github.chechelpo.frplm.extensions.processor.FrplmExtensionProcessorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FrplmExtensionProcessorTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -139,8 +194,18 @@
       <updated>1783643597123</updated>
       <workItem from="1783643599199" duration="25000" />
       <workItem from="1783643635268" duration="344000" />
-      <workItem from="1783643992944" duration="28000" />
+      <workItem from="1783643992944" duration="1241000" />
+      <workItem from="1783646198437" duration="885000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1783644134000</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1783644134001</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,5 +221,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
 </project>

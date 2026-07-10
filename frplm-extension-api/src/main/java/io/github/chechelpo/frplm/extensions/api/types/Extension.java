@@ -28,7 +28,7 @@ public abstract class Extension {
         this.description = description;
         this.source = source;
 
-        this.logger = Logger.getLogger("["+this.extensionID+"]");
+        this.logger = Logger.getLogger("["+this.name+"]");
     }
 
     protected Logger logger() {

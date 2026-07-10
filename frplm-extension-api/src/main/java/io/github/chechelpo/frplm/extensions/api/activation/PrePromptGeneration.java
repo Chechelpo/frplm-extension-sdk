@@ -11,6 +11,7 @@ public interface PrePromptGeneration {
      *
      * <p>Implementations may mutate the supplied PromptBuilder. They must not
      * retain the Session, PromptBuilder, or snapshot objects after this call.</p>
+     * @since 0.1.0
      */
     void run(Session ofSession, PromptBuilder prompt);
 }

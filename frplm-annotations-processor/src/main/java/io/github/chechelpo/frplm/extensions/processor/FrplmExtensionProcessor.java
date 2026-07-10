@@ -30,13 +30,14 @@ public final class FrplmExtensionProcessor extends AbstractProcessor {
             "META-INF/services/io.github.chechelpo.frplm.extensions.api.types.Extension";
 
     private final Set<String> providers = new LinkedHashSet<>();
+    private final FrplmExtensionMetadataWriter metadataWriter =
+            new FrplmExtensionMetadataWriter();
 
     @Override
     public boolean process(
             Set<? extends TypeElement> annotations,
             RoundEnvironment roundEnv
     ) {
-        System.out.println("FrplmExtensionProcessor process");
         TypeElement extensionType = processingEnv.getElementUtils()
                 .getTypeElement(Extension.class.getCanonicalName());
 
@@ -69,32 +70,19 @@ public final class FrplmExtensionProcessor extends AbstractProcessor {
         }
 
         if (roundEnv.processingOver() && !providers.isEmpty()) {
-            writeServiceFile();
+            writeMetadata();
         }
 
         return true;
     }
 
-    private void writeServiceFile() {
-        Filer filer = processingEnv.getFiler();
-
+    private void writeMetadata() {
         try {
-            FileObject file = filer.createResource(
-                    StandardLocation.CLASS_OUTPUT,
-                    "",
-                    SERVICE_FILE
-            );
-
-            try (Writer writer = file.openWriter()) {
-                for (String provider : providers) {
-                    writer.write(provider);
-                    writer.write(System.lineSeparator());
-                }
-            }
+            metadataWriter.write(processingEnv.getFiler(), providers);
         } catch (IOException e) {
             processingEnv.getMessager().printMessage(
                     Diagnostic.Kind.ERROR,
-                    "Failed to generate " + SERVICE_FILE + ": " + e.getMessage()
+                    "Failed to generate FRPLM extension metadata: " + e.getMessage()
             );
         }
     }
