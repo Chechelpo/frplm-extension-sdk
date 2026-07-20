@@ -25,6 +25,8 @@ public non-sealed interface RegionSnapshot extends Snapshot<RegionSnapshot.Refer
         }
     }
 
+    String getDescription();
+    String getName();
     WorldSnapshot getWorld();
 
     LorebookSnapshot lorebook();

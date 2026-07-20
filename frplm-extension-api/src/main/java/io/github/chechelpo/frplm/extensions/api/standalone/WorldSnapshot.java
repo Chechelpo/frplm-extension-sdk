@@ -24,6 +24,8 @@ public non-sealed interface WorldSnapshot extends Snapshot<WorldSnapshot.Referen
         }
     }
 
+    String getName();
+    String getDescription();
     WorldSnapshot.Reference asReference();
     LorebookSnapshot lorebook();
     LocationSnapshot[] getNeighboursOf(LocationSnapshot loc);

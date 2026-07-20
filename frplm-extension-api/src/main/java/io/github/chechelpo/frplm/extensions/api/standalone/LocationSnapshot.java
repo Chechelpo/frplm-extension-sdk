@@ -9,12 +9,12 @@ import java.util.List;
 
 @Ephemeral
 public non-sealed interface LocationSnapshot extends Snapshot<LocationSnapshot.Reference> {
-    record Reference(int worldId, int entryId) implements StableReference {
+    record Reference(int worldId, int id) implements StableReference {
         private static final String prefix = EntityConfigs.Types.LOCATIONS.getEntityType();
         @Contract(pure = true)
         @Override
         public @NotNull String encode() {
-            return prefix + worldId + "," + entryId;
+            return prefix + worldId + "," + id;
         }
 
 
@@ -28,7 +28,7 @@ public non-sealed interface LocationSnapshot extends Snapshot<LocationSnapshot.R
             String[] parts = raw.split(",", -1);
 
             if (parts.length != 2) {
-                throw new IllegalArgumentException("Expected format " + prefix + "<worldId>,<entryId>");
+                throw new IllegalArgumentException("Expected format " + prefix + "<worldId>,<id>");
             }
 
             try {
@@ -41,11 +41,18 @@ public non-sealed interface LocationSnapshot extends Snapshot<LocationSnapshot.R
             }
         }
     }
-    record Edge(LocationSnapshot toLocation, boolean traversable, boolean show_destination_name, boolean show_destination_description){}
+    record Edge<T extends LocationSnapshot>(
+                T toLocation,
+                String edgeDescription,
+                boolean traversable,
+                boolean show_destination_name,
+                boolean show_destination_description
+    ){}
 
     LorebookSnapshot lorebook();
     LocationSnapshot[] getNeighbours();
-    List<Edge> getOutEdges();
+    List<Edge<LocationSnapshot>> getOutEdges();
     RegionSnapshot getParentRegion();
     String getName();
+    String getDescription();
 }

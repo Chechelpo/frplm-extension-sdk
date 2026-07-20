@@ -35,7 +35,7 @@ public non-sealed interface ConnectionSnapshot extends Snapshot {
     ConnectionSnapshot.Reference asReference();
 
     boolean hasApiKey();
-
+    int tokenCount(String text);
     String getName();
     Optional<ChatCompletionResponse> generate(ChatCompletionRequest request);
     /**@apiNote validation must be made by caller */

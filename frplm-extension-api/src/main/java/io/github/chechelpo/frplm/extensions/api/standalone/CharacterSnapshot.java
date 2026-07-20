@@ -24,5 +24,6 @@ public non-sealed interface CharacterSnapshot extends Snapshot<CharacterSnapshot
 
     LorebookSnapshot lorebook();
     String getName();
+    String getDescription();
     LocationSnapshot[] getStartingLocations();
 }

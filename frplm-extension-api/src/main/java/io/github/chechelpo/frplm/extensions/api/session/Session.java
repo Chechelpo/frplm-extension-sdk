@@ -33,10 +33,14 @@ public non-sealed interface Session extends Snapshot<Session.Reference> {
     SessionWorld getWorld();
     Optional<SessionPrompt> getPrompt();
 
+    int getCurrentTick();
+    /** @return all messages in this session */
     @UnmodifiableView
     List<ChatMessage> getChatHistory();
+    /** @return the last n messages of this session */
     List<ChatMessage> getLastMessages(int number);
-    List<ChatMessage> getMessageRange(int from, int to);
+    /** @return a list of the <b>last</b> chat messages who pass from <= message_tick <= to */
+    List<ChatMessage> getLastMessagesRange(int from, int to);
+    /**@return the last message of this session */
     ChatMessage getLastMessage();
-
 }
