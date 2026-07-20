@@ -6,7 +6,7 @@ module chechelpo.frplm.extensions.api {
     exports io.github.chechelpo.frplm.extensions.api.utils;
     exports io.github.chechelpo.frplm.extensions.api;
     exports io.github.chechelpo.frplm.extensions.api.prompts;
-
+    exports io.github.chechelpo.frplm.extensions.api.utils.openai_compatible;
     
     requires org.jetbrains.annotations;
     requires tools.jackson.databind;

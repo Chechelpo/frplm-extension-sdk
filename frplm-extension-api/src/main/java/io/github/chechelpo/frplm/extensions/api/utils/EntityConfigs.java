@@ -109,6 +109,9 @@ public final class EntityConfigs {
         ENTRY_KEYWORDS(ENTRIES_KEYWORDS_str),
         OUTLET(OUTLET_str),
 
+        PROLOG_ARGUMENTS("arguments"),
+        PROLOG_PREDICATE("predicate"),
+
         WORLDS(WORLDS_str),
         REGIONS(REGION_str),
         LOCATIONS(LOCATIONS_str),
