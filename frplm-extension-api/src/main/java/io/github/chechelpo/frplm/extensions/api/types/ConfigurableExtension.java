@@ -9,15 +9,24 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import tools.jackson.core.JacksonException;
 import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ObjectNode;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public abstract class ConfigurableExtension extends Extension {
-    private final JsonNode defaultConfig;
+/**
+ * @param <T> your configuration data carrier class, serializable by jackson
+ */
+public abstract class ConfigurableExtension<T> extends Extension {
+    protected static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    private final Class<T> configClazz;
+    private final T defaultConfig;
     private final HashMap<String, FieldConfig> fields = new HashMap<>();
     private final ExtensionResources resources;
 
@@ -28,11 +37,13 @@ public abstract class ConfigurableExtension extends Extension {
             String name,
             String description,
             String source,
-            JsonNode defaultConfig
+            Class<T> configClazz,
+            T defaultConfig
     ) {
         super(extensionID, name, description, source);
 
         this.defaultConfig = Objects.requireNonNull(defaultConfig, "Default config is null");
+        this.configClazz = configClazz;
 
         this.resources = new ExtensionResources(
                 this.getClass(),
@@ -41,6 +52,9 @@ public abstract class ConfigurableExtension extends Extension {
 
         this.resources.requireAsset(ExtensionResources.CONFIG_PANEL);
     }
+
+    public abstract void onConfigChange(T oldConfig, T newConfig);
+    public void validateConfig(T config){}
 
     public final @NotNull Optional<io.WebAsset> getAsset(@NotNull String relativePath) {
         return resources.getAsset(relativePath);
@@ -54,11 +68,6 @@ public abstract class ConfigurableExtension extends Extension {
         }
     }
 
-    @Override
-    public final JsonNode defaultConfig() {
-        return this.defaultConfig;
-    }
-
     public final void setDBBridge(@NotNull ExtensionDBBridge extensionDBBridge) {
         if (this.dbBridge != null) {
             throw new IllegalStateException("DBBridge already set");
@@ -67,9 +76,9 @@ public abstract class ConfigurableExtension extends Extension {
         this.dbBridge = Objects.requireNonNull(extensionDBBridge, "DBBridge is null");
     }
 
-    protected final JsonNode getCurrentConfig() {
+    protected final T getCurrentConfig() {
         requireDBBridge();
-        return this.dbBridge.getConfig(this.extensionId());
+        return this.dbBridge.getConfig(this.extensionId(), configClazz);
     }
 
     protected final void saveConfig(JsonNode config) {
@@ -81,10 +90,6 @@ public abstract class ConfigurableExtension extends Extension {
     protected final void setFieldConfig(@NotNull String fieldName, @NotNull FieldConfig field) {
         Objects.requireNonNull(fieldName, "fieldName is null");
         Objects.requireNonNull(field, "field is null");
-
-        if (!defaultConfig.has(fieldName)) {
-            throw new IllegalStateException("Field " + fieldName + " not found in default config");
-        }
 
         fields.put(fieldName, field);
     }
@@ -98,15 +103,88 @@ public abstract class ConfigurableExtension extends Extension {
         return Map.copyOf(fields);
     }
 
-    public final void updateConfig(@NotNull JsonNode newConfig) {
-        Objects.requireNonNull(newConfig, "newConfig is null");
+    public final @NotNull T patchConfig(@NotNull JsonNode patch) {
+        Objects.requireNonNull(patch, "patch is null");
+        requireDBBridge();
 
-        validateFieldConfig(newConfig);
-        onConfigChange(newConfig);
-        saveConfig(newConfig);
+        if (!(patch instanceof ObjectNode patchObject)) {
+            throw new IllegalArgumentException(
+                    "Configuration patch must be a JSON object"
+            );
+        }
+
+        T previousConfig = getCurrentConfig();
+
+        JsonNode currentTree = OBJECT_MAPPER.valueToTree(previousConfig);
+
+        if (!(currentTree instanceof ObjectNode currentObject)) {
+            throw new IllegalStateException(
+                    "Configuration type must serialize as a JSON object: "
+                            + configClazz.getName()
+            );
+        }
+
+        ObjectNode mergedConfig = currentObject.deepCopy();
+        patchObject.properties().forEach(entry ->
+                mergedConfig.set(
+                        entry.getKey(),
+                        entry.getValue().deepCopy()
+                )
+        );
+
+        validateFieldConfig(mergedConfig);
+        final T candidate;
+        try {
+            candidate = OBJECT_MAPPER.treeToValue(
+                    mergedConfig,
+                    configClazz
+            );
+        } catch (JacksonException exception) {
+            String message =
+                    "Configuration patch does not produce a valid "
+                            + configClazz.getSimpleName();
+
+            logger().severe(message + ": " + mergedConfig);
+
+            throw new IllegalArgumentException(message, exception);
+        }
+
+        validateConfig(candidate);
+        saveConfig(mergedConfig);
+        onConfigChange(previousConfig, candidate);
+
+        return candidate;
     }
 
-    public abstract void onConfigChange(JsonNode newConfig);
+    public final @NotNull T replaceConfig(@NotNull JsonNode completeConfig) {
+        Objects.requireNonNull(completeConfig, "completeConfig is null");
+        requireDBBridge();
+
+        validateFieldConfig(completeConfig);
+
+        final T candidate;
+        try {
+            candidate = OBJECT_MAPPER.treeToValue(
+                    completeConfig,
+                    configClazz
+            );
+        } catch (JacksonException exception) {
+            throw new IllegalArgumentException(
+                    "Invalid complete configuration",
+                    exception
+            );
+        }
+
+        validateConfig(candidate);
+
+        T previousConfig = getCurrentConfig();
+
+        saveConfig(completeConfig.deepCopy());
+        onConfigChange(previousConfig, candidate);
+
+        return candidate;
+    }
+
 
     private void validateFieldConfig(@NotNull JsonNode newConfig) {
         EngineRepository repository = getRepository();
