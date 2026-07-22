@@ -36,4 +36,17 @@ public interface EngineRepository {
     List<LorebookSnapshot> getLorebooks();
     Optional<LorebookSnapshot> getLorebookWithName(String name);
     Optional<LorebookSnapshot> getLorebook(LorebookSnapshot.Reference reference);
+
+    List<RegionSnapshot> getRegions();
+    Optional<RegionSnapshot> getRegion(RegionSnapshot.Reference reference);
+
+    List<LocationSnapshot> getLocations();
+    Optional<LocationSnapshot> getLocation(LocationSnapshot.Reference reference);
+
+    List<EntrySnapshot> getEntries();
+    Optional<EntrySnapshot> getEntry(EntrySnapshot.Reference reference);
+
+    List<PromptSectionEntitySnapshot> getPromptSections();
+    Optional<PromptSectionEntitySnapshot> getPromptSection(PromptSectionEntitySnapshot.Reference reference);
+
 }

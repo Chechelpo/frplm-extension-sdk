@@ -19,7 +19,7 @@ public non-sealed interface PromptSectionEntitySnapshot extends Snapshot<PromptS
             return ReferenceCodec.encode(PREFIX, promptId, sectionId);
         }
 
-        public @NotNull PromptSectionEntitySnapshot.Reference fromValue(String value){
+        public static @NotNull PromptSectionEntitySnapshot.Reference fromString(String value){
             return ReferenceCodec.parseTwo(value, PREFIX, PromptSectionEntitySnapshot.Reference::new);
         }
     }
