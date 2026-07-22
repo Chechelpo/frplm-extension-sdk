@@ -10,7 +10,7 @@ public sealed interface MoveResult {
     record FailedMove(Type type, SessionCharacter moved, SessionLocation from, SessionLocation to, String message) implements MoveResult {
         public enum Type {
             ALREADY_AT_LOCATION,
-            NOT_NEIGHBOURS,
+            UN_TRAVERSABLE,
             UNKNOWN
         }
         @Override
@@ -42,7 +42,7 @@ public sealed interface MoveResult {
 
     @Contract(value = "_,_,_ -> new", pure = true)
     static @NotNull MoveResult notNeighbours(SessionCharacter moved, SessionLocation location, SessionLocation other){
-        return new FailedMove(FailedMove.Type.NOT_NEIGHBOURS, moved, location, other, "These locations are not neighbours");
+        return new FailedMove(FailedMove.Type.UN_TRAVERSABLE, moved, location, other, "These locations are not neighbours");
     }
 
     @Contract(value = "_,_,_ -> new", pure = true)

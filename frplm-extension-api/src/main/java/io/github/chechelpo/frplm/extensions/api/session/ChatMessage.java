@@ -21,6 +21,8 @@ public non-sealed interface ChatMessage extends Snapshot<ChatMessage.Reference> 
             return ReferenceCodec.parseTwo(value, PREFIX, ChatMessage.Reference::new);
         }
     }
+    boolean isEnabled();
+    int getTick();
     SessionLocation getLocation();
     String content();
     ChatCompletionMessage asChatCompletion();
