@@ -307,7 +307,7 @@ public abstract class ConfigurableExtension<T> extends Extension {
                         return Optional.of("Blank snapshot reference");
                     }
 
-                    Optional<?> snapshot = repository.get(type, reference);
+                    Optional<?> snapshot = repository.resolve(type, reference);
 
                     if (snapshot.isEmpty()) {
                         return Optional.of(

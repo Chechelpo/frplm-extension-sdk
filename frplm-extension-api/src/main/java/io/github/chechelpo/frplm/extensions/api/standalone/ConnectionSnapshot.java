@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 @Ephemeral
-public non-sealed interface ConnectionSnapshot extends Snapshot {
+public non-sealed interface ConnectionSnapshot extends Snapshot<ConnectionSnapshot.Reference> {
     record Reference(int id) implements StableReference {
         private static final String prefix = EntityConfigs.Types.LLM_CONNECTION.getEntityType();
 
