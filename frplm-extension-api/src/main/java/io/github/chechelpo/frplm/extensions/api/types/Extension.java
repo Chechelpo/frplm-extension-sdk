@@ -30,7 +30,9 @@ public abstract class Extension {
 
         this.logger = Logger.getLogger("["+this.name+"]");
     }
-
+    public JsonNode getDefaultConfig(){
+        return null;
+    }
     protected Logger logger() {
         return this.logger;
     }
@@ -56,7 +58,5 @@ public abstract class Extension {
         return Optional.ofNullable(source);
     }
 
-    public JsonNode defaultConfig(){
-        return null;
-    }
+
 }

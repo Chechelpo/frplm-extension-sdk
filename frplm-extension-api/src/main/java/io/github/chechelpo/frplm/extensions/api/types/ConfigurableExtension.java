@@ -4,6 +4,7 @@ import io.github.chechelpo.frplm.extensions.api.EngineRepository;
 import io.github.chechelpo.frplm.extensions.api.standalone.Snapshot;
 import io.github.chechelpo.frplm.extensions.api.utils.ExtensionDBBridge;
 import io.github.chechelpo.frplm.extensions.api.utils.ExtensionResources;
+import io.github.chechelpo.frplm.extensions.api.utils.FindResult;
 import io.github.chechelpo.frplm.extensions.api.utils.io;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -51,6 +52,10 @@ public abstract class ConfigurableExtension<T> extends Extension {
         );
 
         this.resources.requireAsset(ExtensionResources.CONFIG_PANEL);
+    }
+    @Override
+    public JsonNode getDefaultConfig(){
+        return OBJECT_MAPPER.valueToTree(defaultConfig);
     }
 
     public abstract void onConfigChange(T oldConfig, T newConfig);
@@ -307,9 +312,9 @@ public abstract class ConfigurableExtension<T> extends Extension {
                         return Optional.of("Blank snapshot reference");
                     }
 
-                    Optional<?> snapshot = repository.resolve(type, reference);
+                    FindResult<T, ?, ?> snapshot = repository.resolve(type, reference);
 
-                    if (snapshot.isEmpty()) {
+                    if (snapshot.isNotFound()) {
                         return Optional.of(
                                 "No entity of class "
                                         + type.getSimpleName()

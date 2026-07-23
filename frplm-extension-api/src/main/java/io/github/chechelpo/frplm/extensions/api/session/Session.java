@@ -3,6 +3,7 @@ package io.github.chechelpo.frplm.extensions.api.session;
 import io.github.chechelpo.frplm.extensions.api.annotations.Ephemeral;
 import io.github.chechelpo.frplm.extensions.api.standalone.Snapshot;
 import io.github.chechelpo.frplm.extensions.api.standalone.StableReference;
+import io.github.chechelpo.frplm.extensions.api.utils.FindResult;
 import io.github.chechelpo.frplm.extensions.api.utils.ReferenceCodec;
 import io.github.chechelpo.frplm.extensions.api.utils.EntityConfigs;
 import org.jetbrains.annotations.Contract;
@@ -44,7 +45,7 @@ public non-sealed interface Session extends Snapshot<Session.Reference> {
      * @return the assigned session prompt or empty if its unassigned
      * @apiNote this might be changed by user so don't hold on to it
      */
-    Optional<SessionPrompt> getPrompt();
+    FindResult<SessionPrompt, ?, ?> getPrompt();
     /** @return current session tick */
     int getCurrentTick();
     /**

@@ -1,6 +1,7 @@
 package io.github.chechelpo.frplm.extensions.api.standalone;
 
 import io.github.chechelpo.frplm.extensions.api.annotations.Ephemeral;
+import io.github.chechelpo.frplm.extensions.api.utils.FindResult;
 import io.github.chechelpo.frplm.extensions.api.utils.ReferenceCodec;
 import io.github.chechelpo.frplm.extensions.api.utils.EntityConfigs;
 import io.github.chechelpo.frplm.extensions.api.utils.PromptBudget;
@@ -29,7 +30,7 @@ public non-sealed interface PromptSnapshot extends Snapshot<PromptSnapshot.Refer
         }
     }
 
-    Optional<ConnectionSnapshot> getAssignedConnection();
+    FindResult<ConnectionSnapshot, ?, ?> getAssignedConnection();
 
     GenerationConfig getGenerationConfig();
     GenerationParameters getParameters();
