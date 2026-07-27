@@ -1,6 +1,7 @@
 package io.github.chechelpo.frplm.extensions.api.types;
 
 import io.github.chechelpo.frplm.extensions.api.EngineRepository;
+import io.github.chechelpo.frplm.extensions.api.utils.ExtensionDBBridge;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tools.jackson.databind.JsonNode;
@@ -16,6 +17,7 @@ public abstract class Extension {
     private final String source;
     private EngineRepository repository;
     private final Logger logger;
+    protected ExtensionDBBridge dbBridge;
 
     @Contract(pure = true)
     protected Extension(String extensionID, String name , String description, String source){
@@ -30,6 +32,21 @@ public abstract class Extension {
 
         this.logger = Logger.getLogger("["+this.name+"]");
     }
+    public final void setExtensionDBBridge(ExtensionDBBridge bridge){
+        if (this.dbBridge != null)
+            throw new IllegalArgumentException("Extension db bridge was already configured for " + extensionID);
+        this.dbBridge = bridge;
+    }
+    public final boolean isEnabled(){
+        requireDBBridge();
+        return dbBridge.isEnabled(this.extensionId());
+    }
+    protected void requireDBBridge() {
+        if (this.dbBridge == null) {
+            throw new IllegalStateException("DBBridge has not been set");
+        }
+    }
+
     public JsonNode getDefaultConfig(){
         return null;
     }
@@ -52,6 +69,7 @@ public abstract class Extension {
     public final @NotNull String displayName(){
         return this.name;
     }
+
     /** Github repository of the extension for updates */
     @Contract(pure = true)
     public final @NotNull Optional<String> source(){

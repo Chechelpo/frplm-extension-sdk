@@ -31,8 +31,6 @@ public abstract class ConfigurableExtension<T> extends Extension {
     private final HashMap<String, FieldConfig> fields = new HashMap<>();
     private final ExtensionResources resources;
 
-    private ExtensionDBBridge dbBridge;
-
     protected ConfigurableExtension(
             String extensionID,
             String name,
@@ -66,19 +64,6 @@ public abstract class ConfigurableExtension<T> extends Extension {
     }
     public final @NotNull io.WebAsset requireAsset(@NotNull String relativePath) {
         return resources.requireAsset(relativePath);
-    }
-    private void requireDBBridge() {
-        if (this.dbBridge == null) {
-            throw new IllegalStateException("DBBridge has not been set");
-        }
-    }
-
-    public final void setDBBridge(@NotNull ExtensionDBBridge extensionDBBridge) {
-        if (this.dbBridge != null) {
-            throw new IllegalStateException("DBBridge already set");
-        }
-
-        this.dbBridge = Objects.requireNonNull(extensionDBBridge, "DBBridge is null");
     }
 
     protected final T getCurrentConfig() {

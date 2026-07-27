@@ -1,9 +1,7 @@
 package io.github.chechelpo.frplm.extensions.api.prompts;
 
-import io.github.chechelpo.frplm.extensions.api.session.ChatMessage;
 import io.github.chechelpo.frplm.extensions.api.standalone.LorebookSnapshot;
 import io.github.chechelpo.frplm.extensions.api.utils.openai_compatible.ChatCompletionMessage;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.util.List;
@@ -31,6 +29,12 @@ public interface PromptBuilder {
      * detection and lorebook entry injection during engine rendering.</p>
      */
     PromptBuilder appendAsSection(ChatCompletionMessage section);
+
+    PromptBuilder appendAtMacro(String macro, String content);
+    PromptBuilder prependAtMacro(String macro, String content);
+    PromptBuilder addAtMacro(String macro, String content, int atIndex);
+
+    OutletManager getOutletManager();
 
 
     /** Inserts a chat message at this depth. Is not counted as a prompt section. */
