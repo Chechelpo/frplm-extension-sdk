@@ -1,5 +1,6 @@
 package io.github.chechelpo.frplm.extensions.api.utils.openai_compatible;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +10,8 @@ public record GenerationParameters(
         float frequency_penalty,
         float presence_penalty,
         float repetition_penalty,
-        int top_k
+        @JsonIgnore
+        Integer top_k
 ) {
     private static final float DEFAULT_TEMPERATURE = 0.7f;
     private static final float DEFAULT_TOP_P = 0.95f;

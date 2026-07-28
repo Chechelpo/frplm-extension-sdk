@@ -2,6 +2,7 @@ package io.github.chechelpo.frplm.extensions.api.utils.openai_compatible;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import tools.jackson.databind.JsonNode;
@@ -15,18 +16,19 @@ import java.util.Optional;
 public record ChatCompletionRequest(
         @JsonProperty("model")
         @NotNull String modelID,
-
         @NotNull
-        List<ChatCompletionMessage> messages,
-
-        @NotNull
+        @JsonUnwrapped
         GenerationParameters generationParameters,
 
         @NotNull
+        @JsonUnwrapped
         GenerationConfig configurationParameters,
 
         @JsonProperty("response_format")
-        ResponseFormat responseFormat
+        ResponseFormat responseFormat,
+
+        @NotNull
+        List<ChatCompletionMessage> messages
 ) {
     public ChatCompletionRequest {
         Objects.requireNonNull(modelID, "modelID must not be null");
@@ -132,7 +134,7 @@ public record ChatCompletionRequest(
                 false,
                 true,
                 8192,
-                ReasoningEffort.Maximum
+                null
         );
 
         private ResponseFormat responseFormat;
@@ -250,10 +252,10 @@ public record ChatCompletionRequest(
 
             return new ChatCompletionRequest(
                     modelID,
-                    List.copyOf(messages),
                     generationParameters,
                     configurationParameters,
-                    responseFormat
+                    responseFormat,
+                    List.copyOf(messages)
             );
         }
     }
