@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
  * the engine API when needed.</p>
  */
 public sealed interface Snapshot <T extends StableReference>
-        permits ChatMessage, Session, CharacterSnapshot, ConnectionSnapshot, EntrySnapshot, LocationSnapshot, LorebookSnapshot, PromptSectionEntitySnapshot, PromptSnapshot, RegionSnapshot, WorldSnapshot
+        permits ChatMessage, Session, CharacterSnapshot, ConnectionSnapshot, EntrySnapshot, LocationSnapshot, LorebookSnapshot, PromptSectionEntitySnapshot, PromptSnapshot, RegionSnapshot, TagSnapshot, WorldSnapshot
 {
     T asReference();
 
